@@ -1,17 +1,15 @@
+// src/App.jsx
 import React, { useState } from "react";
 import "./App.css";
+import Tarefa from './Tarefa';
+
+
 
 const initialTasks = [
   { id: 1, titulo: "Entregar pedido #453", prioridade: "Alta", status: "A Fazer", responsavel: "Carlos" },
   { id: 2, titulo: "Atualizar rota BH-SP", prioridade: "Média", status: "Em Andamento", responsavel: "Maria" },
   { id: 3, titulo: "Relatório de entregas", prioridade: "Baixa", status: "Concluído", responsavel: "João" }
 ];
-
-const prioridadeCor = {
-  Alta: "red",
-  Média: "orange",
-  Baixa: "green"
-};
 
 function App() {
   const [tasks] = useState(initialTasks);
@@ -27,16 +25,12 @@ function App() {
             {tasks
               .filter(task => task.status === status)
               .map(task => (
-                <div key={task.id} className="card">
-                  <h3>{task.titulo}</h3>
-                  <p><strong>Responsável:</strong> {task.responsavel}</p>
-                  <p>
-                    <strong>Prioridade:</strong>{" "}
-                    <span style={{ color: prioridadeCor[task.prioridade] }}>
-                      {task.prioridade}
-                    </span>
-                  </p>
-                </div>
+                <Tarefa
+                  key={task.id}
+                  titulo={task.titulo}
+                  responsavel={task.responsavel}
+                  prioridade={task.prioridade}
+                />
               ))}
           </div>
         ))}
